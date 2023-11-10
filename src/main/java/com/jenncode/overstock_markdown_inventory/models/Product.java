@@ -90,7 +90,19 @@ public class Product {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", currentQuantity=" + currentQuantity +
+                ", minThreshold=" + minThreshold +
+                ", maxThreshold=" + maxThreshold +
+                ", expiryDate=" + expiryDate +
+                ", markdownDate=" + markdownDate +
+                ", displayedQuantity=" + displayedQuantity +
+                '}';
+    }
 
     // Method to check if the product quantity is below the threshold
     public boolean isBelowThreshold() {
@@ -110,6 +122,20 @@ public class Product {
     public boolean needsMarkdown() {
         Date currentDate = new Date();
         return currentDate.after(markdownDate);
+    }
+    // Calculate the Markdown Date
+    public void calculateMarkdownDate() {
+        // Assuming expiryDate is set and not null
+        long timeDifference = expiryDate.getTime() - new Date().getTime();
+        long daysDifference = timeDifference / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        markdownDate = new Date(new Date().getTime() + daysDifference);
+    }
+
+    // Send Notification for Markdown
+    public void sendMarkdownNotification() {
+        if (needsMarkdown()) {
+            System.out.println("Notification: Product " + name + " needs to be marked down!");
+        }
     }
 
 }

@@ -15,6 +15,12 @@ public class Main {
             // Check and notify quantity thresholds
             productService.checkAndNotifyQuantityThreshold(product);
 
+            // Calculate the Markdown Date
+            product.calculateMarkdownDate();
+
+            // Send notification for Markdown if needed
+            product.sendMarkdownNotification();
+
             // Update product quantity (for demonstration purposes)
             System.out.print("Enter new quantity:");
             int newQuantity = scanner.nextInt();
