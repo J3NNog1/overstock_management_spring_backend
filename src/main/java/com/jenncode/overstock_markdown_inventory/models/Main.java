@@ -16,12 +16,12 @@ public class Main {
             productService.checkAndNotifyQuantityThreshold(product);
 
             // Update product quantity (for demonstration purposes)
-            System.out.print("Enter new quantity: ");
+            System.out.print("Enter new quantity:");
             int newQuantity = scanner.nextInt();
             productService.updateProductQuantity(product, newQuantity);
 
             // Print updated product information
-            System.out.println("Updated Product Information:");
+            System.out.println("Updated Product Information:" + newQuantity);
             System.out.println(product);
         }
     }

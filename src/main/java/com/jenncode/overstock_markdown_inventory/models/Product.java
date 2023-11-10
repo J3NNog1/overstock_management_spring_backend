@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -77,8 +80,14 @@ public class Product {
     }
     // Helper method to parse date from string
     private Date parseDate(String dateString) {
-        // Implement your date parsing logic here
-        return null;  // Replace this with the actual logic
+        try {
+            LocalDate localDate = LocalDate.parse(dateString);
+            return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        } catch (DateTimeParseException e) {
+            // Handle parsing exception
+            e.printStackTrace(); // For demonstration purposes, you might want to handle this more gracefully in your actual application
+            return null;
+        }
     }
 
 
@@ -91,6 +100,16 @@ public class Product {
     // Method to check if the product quantity is above the threshold
     public boolean isAboveThreshold() {
         return currentQuantity > maxThreshold;
+    }
+
+    // Check if the product has reached its expiry date
+    public boolean hasExpired() {
+        Date currentDate = new Date();
+        return currentDate.after(expiryDate);
+    }
+    public boolean needsMarkdown() {
+        Date currentDate = new Date();
+        return currentDate.after(markdownDate);
     }
 
 }
