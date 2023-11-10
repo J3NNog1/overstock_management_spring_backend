@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Scanner;
+
+
+import static org.apache.tomcat.util.http.FastHttpDateFormat.parseDate;
 
 @Getter
 @Setter
@@ -32,14 +36,52 @@ public class Product {
 
 
     //below is my constructor
-    public Product(String name, int currentQuantity, int minThreshold, int maxThreshold, Date expiryDate, Date markdownDate) {
-        this.name = name;
-        this.currentQuantity = currentQuantity;
-        this.minThreshold = minThreshold;
-        this.maxThreshold = maxThreshold;
-        this.expiryDate = expiryDate;
-        this.markdownDate = markdownDate;
+    public Product(Scanner scanner) {
+        System.out.print("Enter product name: ");
+        this.name = scanner.nextLine();
+
+        System.out.print("Enter current quantity: ");
+        this.currentQuantity = scanner.nextInt();
+
+        System.out.print("Enter minimum quantity: ");
+        this.minThreshold = scanner.nextInt();
+
+        System.out.print("Enter maximum quantity: ");
+        this.maxThreshold = scanner.nextInt();
+
+        scanner.nextLine();
+
+        System.out.print("Enter expiry date (yyyy-MM-dd): ");
+        String expiryDateString = scanner.nextLine();
+        this.expiryDate = parseDate(expiryDateString);
+
+        System.out.print("Enter markdown date (yyyy-MM-dd): ");
+        String markdownDateString = scanner.nextLine();
+        this.markdownDate = parseDate(markdownDateString);
+
+        System.out.print("Displayed quantity is: ");
+        this.displayedQuantity = scanner.nextInt();
+
+        scanner.nextLine();
+
+        // Print entered values for debugging
+        System.out.println("Entered values:");
+        System.out.println("Name: " + this.name);
+        System.out.println("Current Quantity: " + this.currentQuantity);
+        System.out.println("Min Threshold: " + this.minThreshold);
+        System.out.println("Max Threshold: " + this.maxThreshold);
+        System.out.println("Expiry Date: " + this.expiryDate);
+        System.out.println("Markdown Date: " + this.markdownDate);
+        System.out.println("Displayed Quantity: " + this.displayedQuantity);
+
     }
+    // Helper method to parse date from string
+    private Date parseDate(String dateString) {
+        // Implement your date parsing logic here
+        return null;  // Replace this with the actual logic
+    }
+
+
 
     // Method to check if the product quantity is below the threshold
     public boolean isBelowThreshold() {
@@ -52,3 +94,4 @@ public class Product {
     }
 
 }
+
