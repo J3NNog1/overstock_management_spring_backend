@@ -7,5 +7,6 @@ public class Main {
             Product product = new Product(scanner);
             // Handle the product as needed
         }
+
     }
 }
