@@ -40,4 +40,15 @@ public class Product {
         this.expiryDate = expiryDate;
         this.markdownDate = markdownDate;
     }
+
+    // Method to check if the product quantity is below the threshold
+    public boolean isBelowThreshold() {
+        return currentQuantity < minThreshold;
+    }
+
+    // Method to check if the product quantity is above the threshold
+    public boolean isAboveThreshold() {
+        return currentQuantity > maxThreshold;
+    }
+
 }
